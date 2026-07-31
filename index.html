@@ -979,6 +979,7 @@ button { touch-action: manipulation; -webkit-touch-callout: none; }
 
   <!-- Match Panel -->
   <div class="panel" id="panel-match">
+    <div class="filter-pills" id="matchFilters"></div>
     <div class="match-controls">
       <button class="card-btn" style="background:linear-gradient(135deg,var(--magic-purple),var(--magic-pink-deep));color:#fff;box-shadow:var(--glow-pink);display:inline-flex;flex:0;padding:10px 18px;font-size:0.9rem;" onclick="startMatch()" aria-label="开始新一轮"><span data-i18n="new_round">🔄 新一轮</span></button>
       <button class="match-diff-btn" data-diff="3" onclick="setMatchDiff(3)" aria-label="简单">😊 Easy</button>
@@ -1118,7 +1119,8 @@ function toggleLang() {
   localStorage.setItem('luo-li-english-lang', currentLang);
   updateUITranslations();
   if (currentTab === 'words') renderWords();
-  if (currentTab === 'match') startMatch();
+  if (currentTab === 'quiz') initQuiz();
+  if (currentTab === 'match') initMatch();
   renderStreakCalendar();
 }
 
@@ -1141,6 +1143,7 @@ let fcIndex = 0;
 let fcFlipped = false;
 let fcFilter = 'all';
 let quizFilter = 'all';
+let matchFilter = 'all';
 let quizQueue = [];
 let quizCurrent = null;
 let matchSelected = null;
@@ -1333,8 +1336,8 @@ function switchTab(tab) {
   document.querySelectorAll('.nav-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
   document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === 'panel-' + tab));
   if (tab === 'flashcard') initFlashcard();
-  if (tab === 'quiz') startQuiz();
-  if (tab === 'match') startMatch();
+  if (tab === 'quiz') initQuiz();
+  if (tab === 'match') initMatch();
   if (tab === 'words') renderWords();
   if (tab !== 'flashcard') {
     const hint = document.getElementById('swipeHint');
@@ -1582,8 +1585,14 @@ function answerQuizReverse(btn, chosen, correct) {
 }
 
 // ===================== MATCH =====================
+function initMatch() {
+  buildFilterPills('matchFilters', matchFilter, (f) => { matchFilter = f; startMatch(); });
+  startMatch();
+}
+
 function startMatch() {
-  const pool = shuffle(VOCAB).slice(0, matchDifficulty);
+  const filtered = getFiltered(matchFilter, VOCAB);
+  const pool = shuffle(filtered).slice(0, Math.min(matchDifficulty, filtered.length));
   const enCards = pool.map(v => ({ type: 'en', text: v.en, pairId: vocabIndex(v), matched: false }));
   const zhCards = pool.map(v => ({ type: 'zh', text: v.zh, pairId: vocabIndex(v), matched: false }));
   matchPairs = shuffle([...enCards, ...zhCards]);
