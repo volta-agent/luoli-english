@@ -1,0 +1,2015 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>✨ Luo Li English ✨</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#2a1658">
+<link rel="manifest" href="manifest.json">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<!-- Fonts: China-friendly mirror of Google Fonts -->
+<link rel="preconnect" href="https://fonts.font.im">
+<link href="https://fonts.font.im/css2?family=ZCOOL+KuaiLe&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* ---- Luo Li English night-sky magic palette ---- */
+  --night1: #140b38;
+  --night2: #241353;
+  --night3: #381d7c;
+  --night4: #4b2394;
+  --magic-pink: #ff7ad9;
+  --magic-pink-deep: #ff3d9a;
+  --magic-gold: #ffd166;
+  --magic-teal: #53e0d8;
+  --magic-purple: #b06bff;
+  --magic-blue: #7db8ff;
+  --magic-crystal: #efe9ff;
+  --magic-rose: #ff8fab;
+  --magic-peach: #ffc2e2;
+  --ink: #3a2060;
+  --card-bg: rgba(43, 22, 88, 0.72);
+  --card-border: rgba(255, 122, 217, 0.35);
+  --glow-pink: 0 0 24px rgba(255, 61, 154, 0.35);
+  --glow-gold: 0 0 24px rgba(255, 209, 102, 0.35);
+  --glow-teal: 0 0 24px rgba(83, 224, 216, 0.30);
+  --text-main: #f6f1ff;
+  --text-soft: #cfc3f2;
+  --text-dim: #9a8cc9;
+  --shadow: 0 12px 40px rgba(10, 4, 40, 0.55);
+  --shadow-lg: 0 20px 60px rgba(10, 4, 40, 0.7);
+  --card-face-front: linear-gradient(160deg, #3b1e7c 0%, #241353 100%);
+  --card-face-back: linear-gradient(160deg, #2b1658 0%, #170d3a 100%);
+}
+
+/* ---- light mode: 仙境的白天 (fairy palace daylight) ---- */
+body.light-mode {
+  --night1: #fdf4ff;
+  --night2: #fbe8ff;
+  --night3: #f3d9ff;
+  --night4: #e7ccff;
+  --card-bg: rgba(255, 255, 255, 0.86);
+  --card-border: rgba(176, 107, 255, 0.30);
+  --glow-pink: 0 0 24px rgba(255, 122, 217, 0.25);
+  --glow-gold: 0 0 24px rgba(255, 170, 60, 0.25);
+  --glow-teal: 0 0 24px rgba(83, 224, 216, 0.25);
+  --text-main: #3a2060;
+  --text-soft: #6d4fa8;
+  --text-dim: #a086c9;
+  --shadow: 0 12px 40px rgba(120, 60, 180, 0.18);
+  --shadow-lg: 0 20px 60px rgba(120, 60, 180, 0.28);
+  --card-face-front: linear-gradient(160deg, #ffffff 0%, #f7e9ff 100%);
+  --card-face-back: linear-gradient(160deg, #fff6fb 0%, #f1e2ff 100%);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+body {
+  font-family: 'Nunito', 'ZCOOL KuaiLe', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  background:
+    radial-gradient(1200px 600px at 15% -10%, rgba(176, 107, 255, 0.28), transparent 60%),
+    radial-gradient(1000px 700px at 110% 20%, rgba(255, 61, 154, 0.22), transparent 60%),
+    radial-gradient(900px 700px at 50% 120%, rgba(83, 224, 216, 0.16), transparent 60%),
+    linear-gradient(160deg, var(--night1) 0%, var(--night2) 40%, var(--night3) 75%, var(--night4) 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  color: var(--text-main);
+  overflow-x: hidden;
+  transition: background 0.6s ease, color 0.6s ease;
+}
+
+/* ============ animated night sky stars ============ */
+.star-bg {
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.star {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.95), rgba(255,255,255,0.05) 70%);
+  animation: star-twinkle linear infinite;
+}
+@keyframes star-twinkle {
+  0%, 100% { opacity: 0.15; transform: scale(0.7); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+
+/* ============ floating petals & butterflies ============ */
+.float-bg { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.petal {
+  position: absolute;
+  top: -40px;
+  font-size: 18px;
+  opacity: 0.55;
+  animation: petal-fall linear infinite;
+}
+@keyframes petal-fall {
+  0%   { transform: translateY(-5vh) translateX(0) rotate(0deg); opacity: 0; }
+  8%   { opacity: 0.6; }
+  50%  { transform: translateY(50vh) translateX(40px) rotate(180deg); }
+  92%  { opacity: 0.6; }
+  100% { transform: translateY(105vh) translateX(-20px) rotate(360deg); opacity: 0; }
+}
+.butterfly {
+  position: absolute;
+  top: -50px;
+  font-size: 20px;
+  animation: butterfly-fly linear infinite;
+  opacity: 0;
+}
+@keyframes butterfly-fly {
+  0%   { transform: translate(0, -5vh) rotate(-8deg); opacity: 0; }
+  10%  { opacity: 0.8; }
+  45%  { transform: translate(120px, 45vh) rotate(10deg); }
+  90%  { opacity: 0.7; }
+  100% { transform: translate(-60px, 108vh) rotate(-6deg); opacity: 0; }
+}
+
+/* ============ magic top bar ============ */
+.magic-bar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--magic-pink), var(--magic-gold), var(--magic-teal), var(--magic-purple), var(--magic-pink));
+  background-size: 300% 100%;
+  animation: magic-slide 5s linear infinite;
+  z-index: 100;
+}
+@keyframes magic-slide {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 660px;
+  margin: 0 auto;
+  padding: 28px 16px 110px;
+}
+
+/* ============ header ============ */
+.header {
+  text-align: center;
+  margin-bottom: 24px;
+  animation: fadeInDown 0.8s ease;
+}
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-22px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.header-top {
+  display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;
+}
+.logo {
+  font-family: 'ZCOOL KuaiLe', 'Nunito', cursive;
+  font-size: 2.1rem;
+  line-height: 1.2;
+  background: linear-gradient(120deg, var(--magic-pink), var(--magic-gold), var(--magic-teal), var(--magic-purple));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 14px rgba(255, 122, 217, 0.35));
+  animation: title-shine 4s linear infinite;
+  letter-spacing: 2px;
+}
+@keyframes title-shine {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+.logo small { display:block; font-size: 0.55em; letter-spacing: 6px; opacity: 0.85; }
+.header-btns { display: flex; gap: 6px; }
+.theme-toggle, .lang-toggle {
+  background: var(--card-bg);
+  border: 1.5px solid var(--card-border);
+  border-radius: 22px;
+  padding: 9px 13px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-main);
+  box-shadow: var(--glow-pink);
+  backdrop-filter: blur(8px);
+  transition: transform 0.15s ease;
+}
+.theme-toggle:active, .lang-toggle:active { transform: scale(0.94); }
+.subtitle {
+  font-family: 'ZCOOL KuaiLe', cursive;
+  font-size: 1rem;
+  color: var(--text-soft);
+  letter-spacing: 3px;
+  margin-top: 4px;
+}
+
+/* ============ stats ============ */
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.stat-card {
+  background: var(--card-bg);
+  border: 1.5px solid var(--card-border);
+  border-radius: 18px;
+  padding: 12px 6px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow);
+  animation: fadeInUp 0.6s ease both;
+}
+.stat-card:nth-child(2) { animation-delay: 0.08s; }
+.stat-card:nth-child(3) { animation-delay: 0.16s; }
+.stat-card:nth-child(4) { animation-delay: 0.24s; }
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.stat-emoji { font-size: 1.25rem; filter: drop-shadow(0 0 8px rgba(255,209,102,0.5)); }
+.stat-value { font-size: 1.35rem; font-weight: 800; margin: 2px 0; color: var(--text-main); }
+.stat-label { font-size: 0.72rem; color: var(--text-soft); }
+
+/* ============ progress ============ */
+.progress-wrap {
+  background: var(--card-bg);
+  border: 1.5px solid var(--card-border);
+  border-radius: 18px;
+  padding: 12px 16px;
+  margin-bottom: 14px;
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow);
+}
+.progress-label {
+  display: flex; justify-content: space-between;
+  font-size: 0.85rem; font-weight: 700;
+  color: var(--text-soft);
+  margin-bottom: 8px;
+}
+.progress-bar {
+  height: 14px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 10px;
+  background: linear-gradient(90deg, var(--magic-pink), var(--magic-gold), var(--magic-teal));
+  background-size: 200% 100%;
+  animation: magic-slide 3s linear infinite;
+  transition: width 0.6s ease;
+  box-shadow: 0 0 14px rgba(255, 122, 217, 0.6);
+}
+
+/* ============ streak calendar ============ */
+.streak-calendar {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+.streak-day {
+  width: 38px; height: 38px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  font-size: 0.68rem;
+  font-weight: 800;
+  background: var(--card-bg);
+  border: 1.5px solid var(--card-border);
+  color: var(--text-dim);
+  transition: all 0.3s ease;
+}
+.streak-day.active {
+  background: linear-gradient(135deg, var(--magic-pink), var(--magic-purple));
+  color: #fff;
+  border-color: transparent;
+  box-shadow: var(--glow-pink);
+  transform: scale(1.08);
+}
+.streak-day.today { outline: 2px dashed var(--magic-gold); outline-offset: 2px; }
+
+/* ============ tabs ============ */
+.nav-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.nav-tab {
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  padding: 10px 4px;
+  background: var(--card-bg);
+  border: 1.5px solid var(--card-border);
+  border-radius: 16px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--text-soft);
+  backdrop-filter: blur(8px);
+  transition: all 0.25s ease;
+}
+.nav-tab .tab-icon { font-size: 1.3rem; }
+.nav-tab:hover { transform: translateY(-2px); }
+.nav-tab.active {
+  background: linear-gradient(135deg, var(--magic-pink-deep), var(--magic-purple));
+  color: #fff;
+  border-color: transparent;
+  box-shadow: var(--glow-pink);
+}
+
+/* ============ panels ============ */
+.panel { display: none; animation: fadeInUp 0.45s ease; }
+.panel.active { display: block; }
+
+/* ============ filter pills ============ */
+.filter-pills {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin-bottom: 14px;
+  justify-content: center;
+}
+.filter-pill, .mastery-pill {
+  padding: 7px 13px;
+  border-radius: 20px;
+  border: 1.5px solid var(--card-border);
+  background: var(--card-bg);
+  color: var(--text-soft);
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+}
+.filter-pill.active, .mastery-pill.active {
+  background: linear-gradient(135deg, var(--magic-gold), var(--magic-pink));
+  color: #3a2060;
+  border-color: transparent;
+  box-shadow: var(--glow-gold);
+}
+
+/* ============ flashcard ============ */
+.auto-play-toggle {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  font-size: 0.85rem; font-weight: 700; color: var(--text-soft);
+  margin-bottom: 14px;
+}
+.auto-play-toggle input { width: 18px; height: 18px; accent-color: var(--magic-pink); cursor: pointer; }
+
+.flashcard-container { perspective: 1400px; -webkit-perspective: 1400px; margin-bottom: 16px; }
+.flashcard {
+  position: relative;
+  width: 100%;
+  min-height: 380px;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  transition: transform 0.65s cubic-bezier(0.4, 0.1, 0.2, 1);
+  cursor: pointer;
+}
+.flashcard.flipped { transform: rotateY(180deg); }
+
+/* iOS Safari: the backface-culled face stays hit-testable, and
+   stopPropagation() can fail inside preserve-3d containers.
+   So (a) disable pointer events on the invisible face so taps can
+   never reach its buttons, and (b) flipCard() also ignores any
+   click that originates from a button (see flipCard below). */
+.flashcard.flipped .flashcard-front { pointer-events: none; }
+.flashcard:not(.flipped) .flashcard-back { pointer-events: none; }
+.flashcard { user-select: none; -webkit-user-select: none; }
+button { touch-action: manipulation; -webkit-touch-callout: none; }
+
+.flashcard-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 28px;
+  padding: 28px 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--card-border);
+  /* NOTE: no overflow:hidden and no ::before decoration here.
+     Both break backface-visibility / hit-testing on iOS Safari
+     for 3D-flipped faces (pony-english relies on this clean setup). */
+}
+
+/* subtle magic ring via pure background gradient (no pseudo-element) */
+.flashcard-front {
+  background:
+    radial-gradient(circle at 50% 50%, transparent 34%, rgba(255, 209, 102, 0.07) 35%, transparent 37%),
+    radial-gradient(circle at 50% 50%, transparent 62%, rgba(176, 107, 255, 0.10) 63%, transparent 65%),
+    radial-gradient(circle at 80% 15%, rgba(255, 122, 217, 0.30), transparent 45%),
+    radial-gradient(circle at 15% 85%, rgba(176, 107, 255, 0.32), transparent 45%),
+    var(--card-face-front);
+  box-shadow: var(--glow-pink), var(--shadow-lg);
+}
+.flashcard-back {
+  background:
+    radial-gradient(circle at 50% 50%, transparent 34%, rgba(255, 209, 102, 0.08) 35%, transparent 37%),
+    radial-gradient(circle at 50% 50%, transparent 62%, rgba(255, 255, 255, 0.10) 63%, transparent 65%),
+    radial-gradient(circle at 20% 10%, rgba(255, 209, 102, 0.24), transparent 45%),
+    radial-gradient(circle at 85% 90%, rgba(83, 224, 216, 0.24), transparent 45%),
+    var(--card-face-back);
+  box-shadow: var(--glow-gold), var(--shadow-lg);
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+}
+.flashcard-unit {
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--magic-gold);
+  margin-bottom: 10px;
+  text-shadow: 0 0 12px rgba(255, 209, 102, 0.4);
+}
+.flashcard-counter {
+  position: absolute; top: 18px; right: 20px;
+  font-size: 0.78rem; font-weight: 800; color: var(--text-dim);
+}
+.flashcard-word {
+  font-family: 'Nunito', 'ZCOOL KuaiLe', cursive;
+  font-size: 3rem;
+  font-weight: 800;
+  text-align: center;
+  margin: 12px 0;
+  word-break: break-word;
+  color: var(--text-main);
+  text-shadow: 0 0 26px rgba(255, 122, 217, 0.45);
+}
+.flashcard-word.zh {
+  font-family: 'ZCOOL KuaiLe', 'PingFang SC', sans-serif;
+  font-size: 2.6rem;
+  text-shadow: 0 0 26px rgba(255, 209, 102, 0.45);
+}
+.audio-row { display: flex; align-items: center; gap: 8px; margin: 10px 0; }
+.audio-label { font-size: 0.75rem; font-weight: 700; color: var(--text-soft); margin-right: 6px; }
+.audio-btn {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  border: 2px solid var(--card-border);
+  background: rgba(255,255,255,0.1);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #fff;
+}
+.audio-btn.playing {
+  background: linear-gradient(135deg, var(--magic-gold), var(--magic-pink));
+  box-shadow: 0 0 20px rgba(255, 209, 102, 0.7);
+  animation: pulse 0.9s ease infinite;
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+}
+.flashcard-hint {
+  position: absolute; bottom: 16px;
+  font-size: 0.72rem; color: var(--text-dim);
+  letter-spacing: 1px;
+}
+.sentence-block {
+  text-align: center;
+  margin: 10px 0;
+  width: 100%;
+}
+.sentence-en {
+  font-size: 1.05rem; font-weight: 700; color: var(--text-main);
+  margin-bottom: 6px;
+}
+.sentence-zh {
+  font-size: 0.95rem; color: var(--text-soft);
+  margin-bottom: 10px;
+}
+.sentence-audio-row { display: flex; gap: 10px; justify-content: center; }
+.sentence-audio-btn {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1.5px solid var(--card-border);
+  background: rgba(255,255,255,0.1);
+  color: var(--text-main);
+  font-family: inherit;
+  font-size: 0.8rem; font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.sentence-audio-btn:hover { background: rgba(255,122,217,0.2); }
+.sentence-audio-btn.playing { background: linear-gradient(135deg, var(--magic-gold), var(--magic-pink)); color: #3a2060; }
+
+.card-actions { display: flex; gap: 12px; }
+.card-btn {
+  flex: 1;
+  padding: 14px 10px;
+  border-radius: 22px;
+  border: none;
+  font-family: 'ZCOOL KuaiLe', 'Nunito', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+}
+.card-btn:active { transform: scale(0.96); }
+.btn-hard {
+  background: linear-gradient(135deg, #5b3f9e, #7c4dbb);
+  color: #fff;
+  border: 1.5px solid rgba(255,255,255,0.15);
+}
+.btn-hard:hover { box-shadow: 0 6px 24px rgba(124, 77, 187, 0.5); }
+.btn-easy {
+  background: linear-gradient(135deg, var(--magic-pink-deep), var(--magic-purple));
+  color: #fff;
+  box-shadow: var(--glow-pink);
+}
+.btn-easy:hover { box-shadow: 0 6px 30px rgba(255, 61, 154, 0.6); }
+.swipe-hint { text-align: center; font-size: 0.72rem; color: var(--text-dim); margin-top: 12px; letter-spacing: 1px; }
+
+/* ============ quiz ============ */
+.quiz-direction {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  margin-bottom: 14px;
+  font-size: 0.85rem; font-weight: 700; color: var(--text-soft);
+}
+.quiz-direction select {
+  padding: 8px 12px;
+  border-radius: 14px;
+  border: 1.5px solid var(--card-border);
+  background: var(--card-bg);
+  color: var(--text-main);
+  font-family: inherit;
+  font-size: 0.85rem; font-weight: 700;
+  cursor: pointer;
+}
+.quiz-question {
+  background: var(--card-bg);
+  border: 2px solid var(--card-border);
+  border-radius: 26px;
+  padding: 28px 20px;
+  text-align: center;
+  margin-bottom: 16px;
+  backdrop-filter: blur(12px);
+  box-shadow: var(--glow-teal), var(--shadow);
+  position: relative;
+}
+.quiz-prompt { font-size: 0.85rem; color: var(--text-soft); font-weight: 700; letter-spacing: 1px; }
+.quiz-word {
+  font-family: 'Nunito', 'ZCOOL KuaiLe', cursive;
+  font-size: 2.3rem; font-weight: 800;
+  margin: 12px 0;
+  color: var(--text-main);
+  text-shadow: 0 0 22px rgba(83, 224, 216, 0.5);
+  word-break: break-word;
+}
+.quiz-word.zh { font-family: 'ZCOOL KuaiLe', 'PingFang SC', sans-serif; font-size: 2.1rem; text-shadow: 0 0 22px rgba(255, 122, 217, 0.5); }
+.quiz-audio-row { display: flex; gap: 10px; justify-content: center; margin: 8px 0; }
+.quiz-unit-tag {
+  position: absolute; top: 14px; left: 16px;
+  font-size: 0.7rem; font-weight: 800; color: var(--magic-gold);
+  letter-spacing: 1px;
+}
+.quiz-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.quiz-option {
+  padding: 18px 10px;
+  border-radius: 18px;
+  border: 1.5px solid var(--card-border);
+  background: var(--card-bg);
+  color: var(--text-main);
+  font-family: 'ZCOOL KuaiLe', 'Nunito', sans-serif;
+  font-size: 1.05rem; font-weight: 700;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: all 0.2s ease;
+  position: relative;
+}
+.quiz-option:hover { transform: translateY(-2px); box-shadow: var(--glow-pink); }
+.quiz-option.correct {
+  background: linear-gradient(135deg, #34d399, #0ea5e9);
+  color: #fff; border-color: transparent;
+  box-shadow: 0 0 24px rgba(52, 211, 153, 0.5);
+}
+.quiz-option.wrong {
+  background: linear-gradient(135deg, #f43f5e, #e11d48);
+  color: #fff; border-color: transparent;
+  box-shadow: 0 0 24px rgba(244, 63, 94, 0.5);
+}
+.quiz-icon { position: absolute; top: 8px; right: 12px; font-size: 1.1rem; font-weight: 900; }
+.empty-state { text-align: center; padding: 40px 20px; }
+.empty-emoji { font-size: 3rem; margin-bottom: 10px; filter: drop-shadow(0 0 18px rgba(255,209,102,0.6)); }
+.empty-state p { color: var(--text-soft); font-weight: 700; }
+
+/* ============ match ============ */
+.match-controls {
+  display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 16px;
+}
+.match-diff-btn {
+  padding: 9px 14px;
+  border-radius: 18px;
+  border: 1.5px solid var(--card-border);
+  background: var(--card-bg);
+  color: var(--text-soft);
+  font-family: inherit;
+  font-size: 0.8rem; font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.match-diff-btn.active {
+  background: linear-gradient(135deg, var(--magic-teal), var(--magic-blue));
+  color: #142a3a;
+  border-color: transparent;
+  box-shadow: var(--glow-teal);
+}
+.match-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+@media (min-width: 520px) { .match-grid { grid-template-columns: repeat(3, 1fr); } }
+.match-card {
+  position: relative;
+  min-height: 92px;
+  padding: 26px 12px 12px;
+  border-radius: 18px;
+  border: 2px solid var(--card-border);
+  background: var(--card-bg);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Nunito', 'ZCOOL KuaiLe', sans-serif;
+  font-size: 1.05rem; font-weight: 800;
+  color: var(--text-main);
+  text-align: center;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: all 0.2s ease;
+  word-break: break-word;
+}
+.match-card.en { border-color: rgba(83, 224, 216, 0.4); }
+.match-card.zh { border-color: rgba(255, 122, 217, 0.4); font-family: 'ZCOOL KuaiLe', 'PingFang SC', sans-serif; }
+.match-card:hover { transform: translateY(-2px); }
+.match-card.selected {
+  border-color: var(--magic-gold);
+  box-shadow: var(--glow-gold);
+  transform: scale(1.03);
+}
+.match-card.matched {
+  opacity: 0.45;
+  background: linear-gradient(135deg, rgba(52,211,153,0.25), rgba(14,165,233,0.25));
+  border-color: rgba(52,211,153,0.6);
+  pointer-events: none;
+  box-shadow: none;
+}
+.match-card.wrong-match {
+  border-color: #f43f5e;
+  box-shadow: 0 0 20px rgba(244, 63, 94, 0.5);
+  animation: shake 0.35s ease;
+}
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-7px); }
+  75% { transform: translateX(7px); }
+}
+.match-audio {
+  position: absolute; top: 8px; right: 10px;
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,0.12);
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+.undo-row { text-align: center; margin-top: 12px; }
+#matchUndoBtn { flex: 0; padding: 10px 22px; }
+
+/* ============ words list ============ */
+.mastery-filter { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 14px; }
+.unit-section {
+  background: var(--card-bg);
+  border: 1.5px solid var(--card-border);
+  border-radius: 22px;
+  margin-bottom: 14px;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow);
+  animation: fadeInUp 0.5s ease both;
+}
+.unit-header {
+  display: flex; align-items: center; gap: 12px;
+  padding: 16px 14px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.unit-header:hover { background: rgba(255,255,255,0.05); }
+.unit-icon {
+  width: 48px; height: 48px;
+  border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem;
+  box-shadow: var(--glow-pink);
+  flex-shrink: 0;
+}
+.unit-info { flex: 1; }
+.unit-title { font-family: 'ZCOOL KuaiLe', 'Nunito', sans-serif; font-size: 1rem; font-weight: 700; color: var(--text-main); }
+.unit-count { font-size: 0.75rem; color: var(--text-dim); font-weight: 700; margin-top: 2px; }
+.unit-arrow { font-size: 0.9rem; color: var(--text-dim); transition: transform 0.3s ease; }
+.unit-header.open .unit-arrow { transform: rotate(180deg); }
+.unit-progress-ring { width: 40px; height: 40px; flex-shrink: 0; transform: rotate(-90deg); }
+.ring-bg { fill: none; stroke: rgba(255,255,255,0.12); stroke-width: 4; }
+.ring-fill { fill: none; stroke: url(#grad); stroke-width: 4; stroke-linecap: round; transition: stroke-dashoffset 0.8s ease; }
+.unit-words { display: none; }
+.unit-words.open { display: block; }
+.word-row {
+  display: flex; align-items: center; gap: 8px;
+  padding: 12px 14px;
+  border-left: 4px solid transparent;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  transition: background 0.2s ease;
+}
+.word-row:hover { background: rgba(255,255,255,0.04); }
+.word-text { flex: 1; min-width: 0; }
+.word-en { font-weight: 800; font-size: 0.95rem; color: var(--text-main); }
+.word-zh { font-size: 0.82rem; color: var(--text-soft); margin-top: 1px; }
+.word-sent { font-size: 0.75rem; color: var(--text-dim); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.word-audio-btn {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  border: 1.5px solid var(--card-border);
+  background: rgba(255,255,255,0.08);
+  cursor: pointer;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+.word-audio-btn.playing { background: linear-gradient(135deg, var(--magic-gold), var(--magic-pink)); }
+.mastery-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 0 8px currentColor; }
+.mastery-0 { background: #8a7bb5; color: #8a7bb5; }
+.mastery-1 { background: #ffd166; color: #ffd166; }
+.mastery-2 { background: #ff9a62; color: #ff9a62; }
+.mastery-3 { background: #53e0d8; color: #53e0d8; }
+
+.tricky-section {
+  background: var(--card-bg);
+  border: 1.5px dashed var(--card-border);
+  border-radius: 22px;
+  padding: 16px;
+  margin-top: 18px;
+  backdrop-filter: blur(10px);
+}
+.tricky-title { font-family: 'ZCOOL KuaiLe', 'Nunito', sans-serif; font-size: 1rem; font-weight: 700; color: var(--magic-pink); margin-bottom: 10px; letter-spacing: 1px; }
+.tricky-empty { text-align: center; color: var(--text-soft); font-size: 0.9rem; padding: 12px; }
+
+/* ============ celebration modal ============ */
+.celebration {
+  position: fixed; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 200;
+  background: rgba(10, 4, 40, 0.7);
+  backdrop-filter: blur(6px);
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+.celebration.show { opacity: 1; pointer-events: auto; }
+.celebration-card {
+  position: relative;
+  text-align: center;
+  padding: 40px 34px 32px;
+  border-radius: 30px;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255,122,217,0.3), transparent 50%),
+    radial-gradient(circle at 75% 80%, rgba(255,209,102,0.25), transparent 50%),
+    linear-gradient(160deg, #3b1e7c, #241353);
+  border: 2px solid rgba(255, 209, 102, 0.5);
+  box-shadow: 0 0 60px rgba(255, 122, 217, 0.5), var(--shadow-lg);
+  max-width: 340px;
+  width: 90%;
+  animation: celPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  color: #fff;
+}
+@keyframes celPop {
+  from { transform: scale(0.6); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.celebration-card::after {
+  content: '✦ ✦ ✦';
+  position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
+  color: var(--magic-gold);
+  letter-spacing: 8px;
+  font-size: 0.8rem;
+}
+.celebration-emoji {
+  font-size: 3.4rem;
+  margin-bottom: 8px;
+  filter: drop-shadow(0 0 20px rgba(255,209,102,0.8));
+  animation: floaty 2.4s ease-in-out infinite;
+}
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.celebration-title {
+  font-family: 'ZCOOL KuaiLe', 'Nunito', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  background: linear-gradient(120deg, var(--magic-gold), var(--magic-pink), var(--magic-teal));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.celebration-msg { font-size: 0.92rem; color: #d9cdff; line-height: 1.6; margin-bottom: 18px; }
+.celebration-btn {
+  padding: 12px 30px;
+  border-radius: 24px;
+  border: none;
+  background: linear-gradient(135deg, var(--magic-pink-deep), var(--magic-purple));
+  color: #fff;
+  font-family: 'ZCOOL KuaiLe', 'Nunito', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 24px rgba(255, 61, 154, 0.5);
+  transition: transform 0.15s ease;
+}
+.celebration-btn:active { transform: scale(0.95); }
+
+/* ============ confetti canvas ============ */
+.confetti-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 150; }
+
+/* ============ responsive ============ */
+@media (max-width: 420px) {
+  .logo { font-size: 1.7rem; }
+  .flashcard { min-height: 330px; }
+  .flashcard-word { font-size: 2.4rem; }
+  .flashcard-word.zh { font-size: 2.1rem; }
+  .quiz-word { font-size: 1.9rem; }
+  .stats-bar { gap: 6px; }
+  .stat-value { font-size: 1.1rem; }
+  .stat-emoji { font-size: 1.05rem; }
+  .theme-toggle, .lang-toggle { padding: 8px 10px; font-size: 0.8rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="magic-bar"></div>
+<div class="star-bg" id="starBg"></div>
+<div class="float-bg" id="floatBg"></div>
+<canvas class="confetti-canvas" id="confettiCanvas"></canvas>
+
+<div class="container">
+  <div class="header">
+    <div class="header-top">
+      <h1 class="logo">✨ Luo Li English <small>罗丽英语</small></h1>
+      <div class="header-btns">
+        <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="切换主题">☀️</button>
+        <button class="lang-toggle" id="langToggle" onclick="toggleLang()">🌐 中/EN</button>
+      </div>
+    </div>
+    <div class="subtitle" data-i18n="subtitle">三年级下册 · 与仙子一起学英语</div>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat-card">
+      <div class="stat-emoji">🌸</div>
+      <div class="stat-value" id="statLearned">0</div>
+      <div class="stat-label" data-i18n="learned">已学会</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-emoji">🔥</div>
+      <div class="stat-value" id="statStreak">0</div>
+      <div class="stat-label" data-i18n="streak">连续</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-emoji">💎</div>
+      <div class="stat-value" id="statTotal">0</div>
+      <div class="stat-label" data-i18n="total">词汇</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-emoji">🏆</div>
+      <div class="stat-value" id="statScore">0</div>
+      <div class="stat-label" data-i18n="score">仙力</div>
+    </div>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-label">
+      <span>✨ <span data-i18n="progress">魔法能量</span></span>
+      <span id="progressPct">0%</span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+    </div>
+  </div>
+
+  <div class="streak-calendar" id="streakCalendar" aria-label="每日学习星光"></div>
+
+  <div class="nav-tabs">
+    <button class="nav-tab active" data-tab="flashcard" aria-label="魔法卡片">
+      <span class="tab-icon">🃏</span>
+      <span data-i18n="tab_cards">卡片</span>
+    </button>
+    <button class="nav-tab" data-tab="quiz" aria-label="仙法测验">
+      <span class="tab-icon">🎯</span>
+      <span data-i18n="tab_quiz">测验</span>
+    </button>
+    <button class="nav-tab" data-tab="match" aria-label="灵犀配对">
+      <span class="tab-icon">🧩</span>
+      <span data-i18n="tab_match">配对</span>
+    </button>
+    <button class="nav-tab" data-tab="words" aria-label="词汇宝典">
+      <span class="tab-icon">📖</span>
+      <span data-i18n="tab_words">词汇</span>
+    </button>
+  </div>
+
+  <!-- Flashcard Panel -->
+  <div class="panel active" id="panel-flashcard">
+    <div class="auto-play-toggle">
+      <input type="checkbox" id="autoPlayCheck" checked>
+      <label for="autoPlayCheck" data-i18n="auto_play">🦋 自动播放仙音</label>
+    </div>
+    <div class="filter-pills" id="flashcardFilters"></div>
+    <div class="flashcard-container">
+      <div class="flashcard" id="flashcard">
+        <div class="flashcard-face flashcard-front">
+          <div class="flashcard-unit" id="fcUnit">Unit 1</div>
+          <div class="flashcard-counter" id="fcCounter">1 / 24</div>
+          <div class="flashcard-word" id="fcWord">loading...</div>
+          <div class="audio-row">
+            <button class="audio-btn" id="btn_fc_en" aria-label="播放英语发音">🔊</button>
+            <span class="audio-label">English</span>
+            <button class="audio-btn" id="btn_fc_zh" aria-label="播放中文发音">🔊</button>
+            <span class="audio-label">中文</span>
+          </div>
+          <div class="flashcard-hint">👆 点击翻牌 · 罗丽魔法！</div>
+        </div>
+        <div class="flashcard-face flashcard-back">
+          <div class="flashcard-unit" id="fcUnitBack"></div>
+          <div class="flashcard-word zh" id="fcWordBack">—</div>
+          <div class="sentence-block">
+            <div class="sentence-en" id="fcSentEn"></div>
+            <div class="sentence-zh" id="fcSentZh"></div>
+            <div class="sentence-audio-row">
+              <button class="sentence-audio-btn" id="btn_fc_sent_en">🔊 Listen</button>
+              <button class="sentence-audio-btn" id="btn_fc_sent_zh">🔊 听一听</button>
+            </div>
+          </div>
+          <div class="flashcard-hint">👆 点击翻回</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-actions">
+      <button class="card-btn btn-hard" onclick="markCard('hard')" aria-label="标记为不会"><span data-i18n="btn_tricky">💔 待修炼</span></button>
+      <button class="card-btn btn-easy" onclick="markCard('easy')" aria-label="标记为学会了"><span data-i18n="btn_gotit">💚 学会啦</span></button>
+    </div>
+    <div class="swipe-hint" id="swipeHint">← 左滑学会 · 右滑待修炼 · 空格翻牌 →</div>
+  </div>
+
+  <!-- Quiz Panel -->
+  <div class="panel" id="panel-quiz">
+    <div class="filter-pills" id="quizFilters"></div>
+    <div class="quiz-direction">
+      <label data-i18n="quiz_direction">试炼方向:</label>
+      <select id="quizDirection" onchange="startQuiz()" aria-label="测验方向">
+        <option value="en2zh">English → 中文</option>
+        <option value="zh2en">中文 → English</option>
+      </select>
+    </div>
+    <div id="quizArea"></div>
+  </div>
+
+  <!-- Match Panel -->
+  <div class="panel" id="panel-match">
+    <div class="match-controls">
+      <button class="card-btn" style="background:linear-gradient(135deg,var(--magic-purple),var(--magic-pink-deep));color:#fff;box-shadow:var(--glow-pink);display:inline-flex;flex:0;padding:10px 18px;font-size:0.9rem;" onclick="startMatch()" aria-label="开始新一轮"><span data-i18n="new_round">🔄 新一轮</span></button>
+      <button class="match-diff-btn" data-diff="3" onclick="setMatchDiff(3)" aria-label="简单">😊 Easy</button>
+      <button class="match-diff-btn active" data-diff="5" onclick="setMatchDiff(5)" aria-label="普通">🎯 Normal</button>
+      <button class="match-diff-btn" data-diff="7" onclick="setMatchDiff(7)" aria-label="困难">🔥 Hard</button>
+    </div>
+    <div class="match-grid" id="matchGrid"></div>
+    <div class="undo-row">
+      <button class="card-btn" id="matchUndoBtn" style="background:rgba(176,107,255,0.18);color:var(--text-main);display:none;flex:0;padding:10px 22px;font-size:0.9rem;" onclick="undoMatch()" aria-label="撤销上次配对">↩️ Undo</button>
+    </div>
+  </div>
+
+  <!-- Words Panel -->
+  <div class="panel" id="panel-words">
+    <div class="mastery-filter" id="masteryFilter" aria-label="按掌握程度筛选"></div>
+    <div id="wordsList"></div>
+    <div class="tricky-section" id="trickySection">
+      <div class="tricky-title">💔 <span data-i18n="tricky_title">待炼仙词</span> <span id="trickyCount" style="font-size:0.75rem;color:var(--text-dim);font-weight:600;"></span></div>
+      <div id="trickyList"></div>
+    </div>
+  </div>
+</div>
+
+<div class="celebration" id="celebration" role="dialog" aria-live="polite" aria-label="变身庆祝">
+  <div class="celebration-card">
+    <div class="celebration-emoji" id="celEmoji">🦋</div>
+    <div class="celebration-title" id="celTitle">罗丽魔法！</div>
+    <div class="celebration-msg" id="celMsg">变身成功！继续加油！</div>
+    <button class="celebration-btn" onclick="closeCelebration()" aria-label="继续学习">变身！继续 ✨</button>
+  </div>
+</div>
+
+<script src="vocab_data.js"></script>
+<script>
+// ===================== I18N =====================
+// Migrate localStorage keys from the previous branding (yue-luo-li → Luo Li English)
+(function migrateLegacyStorage() {
+  const legacyKeys = {
+    'yue-luo-li-lang': 'luo-li-english-lang',
+    'yue-luo-li-state': 'luo-li-english-state',
+    'yue-luo-li-theme': 'luo-li-english-theme',
+    'yue-luo-li-streak-days': 'luo-li-english-streak-days',
+  };
+  for (const [oldKey, newKey] of Object.entries(legacyKeys)) {
+    if (localStorage.getItem(newKey) === null && localStorage.getItem(oldKey) !== null) {
+      localStorage.setItem(newKey, localStorage.getItem(oldKey));
+    }
+  }
+})();
+
+let currentLang = localStorage.getItem('luo-li-english-lang') || 'zh';
+
+const I18N = {
+  zh: {
+    subtitle: '三年级下册 · 与仙子一起学英语',
+    learned: '已学会',
+    streak: '连续',
+    total: '词汇',
+    score: '仙力',
+    progress: '魔法能量',
+    tab_cards: '卡片',
+    tab_quiz: '测验',
+    tab_match: '配对',
+    tab_words: '词汇',
+    auto_play: '🦋 自动播放仙音',
+    btn_tricky: '💔 待修炼',
+    btn_gotit: '💚 学会啦',
+    new_round: '🔄 新一轮',
+    unit: '契约',
+    mastered: '掌握',
+    quiz_question: '这个词的魔法真意是？ 🤔',
+    round_complete: '本轮试炼完成！再来一轮？',
+    new_round_btn: '🔄 新一轮',
+    perfect_match: '灵犀一瞬！',
+    perfect_match_msg: '心念相通，配对完美！仙子的魔法与你同在！',
+    keep_going: '变身！继续 ✨',
+    all_mastered: '全部掌握！',
+    all_mastered_msg: '所有仙词你都学会了！你已成为真正的魔法仙子！👑✨',
+    quiz_direction: '试炼方向:',
+    tricky_title: '待炼仙词',
+    mastery_all: '🌈 全部',
+    mastery_new: '🆕 新词',
+    mastery_learning: '📝 修炼中',
+    mastery_familiar: '👍 熟练',
+    mastery_mastered: '✅ 已掌握',
+    match_undo: '↩️ 撤销',
+  },
+  en: {
+    subtitle: 'Grade 3 · Learn English with the Fairies',
+    learned: 'Learned',
+    streak: 'Streak',
+    total: 'Words',
+    score: 'Power',
+    progress: 'Magic Energy',
+    tab_cards: 'Cards',
+    tab_quiz: 'Quiz',
+    tab_match: 'Match',
+    tab_words: 'Words',
+    auto_play: '🦋 Auto-play magic voice',
+    btn_tricky: '💔 Practice',
+    btn_gotit: '💚 Got it!',
+    new_round: '🔄 New Round',
+    unit: 'Pact',
+    mastered: 'mastered',
+    quiz_question: 'What is the true meaning? 🤔',
+    round_complete: 'Trial complete! One more round?',
+    new_round_btn: '🔄 New Round',
+    perfect_match: 'Soul Bond!',
+    perfect_match_msg: 'A perfect match! The fairies are with you!',
+    keep_going: 'Transform! Keep Going ✨',
+    all_mastered: 'All Mastered!',
+    all_mastered_msg: 'You learned every magic word! You are a true fairy now! 👑✨',
+    quiz_direction: 'Direction:',
+    tricky_title: 'Tricky Words',
+    mastery_all: '🌈 All',
+    mastery_new: '🆕 New',
+    mastery_learning: '📝 Learning',
+    mastery_familiar: '👍 Familiar',
+    mastery_mastered: '✅ Mastered',
+    match_undo: '↩️ Undo',
+  }
+};
+
+function t(key) {
+  return I18N[currentLang][key] || I18N['zh'][key] || key;
+}
+
+function updateUITranslations() {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (I18N[currentLang][key]) el.textContent = I18N[currentLang][key];
+  });
+}
+
+function toggleLang() {
+  currentLang = currentLang === 'zh' ? 'en' : 'zh';
+  localStorage.setItem('luo-li-english-lang', currentLang);
+  updateUITranslations();
+  if (currentTab === 'words') renderWords();
+  if (currentTab === 'match') startMatch();
+  renderStreakCalendar();
+}
+
+// ===================== CELEBRATION PHRASES (Luo Li magic flavored) =====================
+const ENCOURAGEMENTS = [
+  { emoji: "🦋", title: "罗丽魔法！", msg: "变身成功！你像蝴蝶仙子一样闪耀！" },
+  { emoji: "🌹", title: "花语绽放！", msg: "罗丽的花瓣也在为你飞舞喝彩！" },
+  { emoji: "🪄", title: "仙法精进！", msg: "魔法杖为你亮起彩虹般的光芒！" },
+  { emoji: "💎", title: "灵犀相通！", msg: "心与词汇之间架起了仙力的桥梁！" },
+  { emoji: "✨", title: "星光加冕！", msg: "夜空中的星星都在为你闪烁！" },
+  { emoji: "🦚", title: "孔雀开屏！", msg: "蓝色仙羽般优雅的你又前进了一步！" },
+  { emoji: "🌸", title: "仙子赐福！", msg: "花语精灵把好运都送给你！" },
+  { emoji: "🌙", title: "月光祝福！", msg: "月下的魔法契约又点亮了一颗星！" },
+];
+
+// ===================== STATE =====================
+let state = loadState();
+let currentTab = 'flashcard';
+let fcIndex = 0;
+let fcFlipped = false;
+let fcFilter = 'all';
+let quizFilter = 'all';
+let quizQueue = [];
+let quizCurrent = null;
+let matchSelected = null;
+let matchPairs = [];
+let matchHistory = [];
+let matchDifficulty = 5;
+let masteryFilterVal = 'all';
+let currentAudio = null;
+let currentAudioBtn = null;
+
+function defaultState() {
+  const mastery = {};
+  VOCAB.forEach((v, i) => { mastery[i] = 0; });
+  return { mastery, score: 0, streak: 0, totalAnswered: 0 };
+}
+
+function loadState() {
+  try {
+    const s = JSON.parse(localStorage.getItem('luo-li-english-state'));
+    if (s && s.mastery) return s;
+  } catch (e) {}
+  return defaultState();
+}
+
+function saveState() {
+  localStorage.setItem('luo-li-english-state', JSON.stringify(state));
+}
+
+// ===================== AUDIO =====================
+function stopCurrentAudio() {
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio.currentTime = 0;
+    if (currentAudioBtn) {
+      currentAudioBtn.classList.remove('playing');
+      currentAudioBtn = null;
+    }
+    currentAudio = null;
+  }
+}
+
+function playAudioPath(audioPath, btn) {
+  stopCurrentAudio();
+  if (!audioPath) return;
+  const audio = new Audio(audioPath);
+  currentAudio = audio;
+  if (btn) {
+    currentAudioBtn = btn;
+    btn.classList.add('playing');
+  }
+  audio.onended = () => {
+    if (currentAudioBtn) currentAudioBtn.classList.remove('playing');
+    currentAudio = null;
+    currentAudioBtn = null;
+  };
+  audio.onerror = () => {
+    console.warn('Audio error:', audioPath);
+    if (currentAudioBtn) currentAudioBtn.classList.remove('playing');
+    currentAudio = null;
+    currentAudioBtn = null;
+  };
+  audio.play().catch(e => console.warn('Audio play failed:', e));
+}
+
+function playAudio(key) {
+  let audioPath = null;
+  let btn = null;
+  if (key === 'fc_en') {
+    const pool = getFiltered(fcFilter, VOCAB);
+    audioPath = pool[fcIndex].au.en;
+    btn = document.getElementById('btn_fc_en');
+  } else if (key === 'fc_zh') {
+    const pool = getFiltered(fcFilter, VOCAB);
+    audioPath = pool[fcIndex].au.zh;
+    btn = document.getElementById('btn_fc_zh');
+  } else if (key === 'fc_sent_en') {
+    const pool = getFiltered(fcFilter, VOCAB);
+    audioPath = pool[fcIndex].au.sen;
+    btn = document.getElementById('btn_fc_sent_en');
+  } else if (key === 'fc_sent_zh') {
+    const pool = getFiltered(fcFilter, VOCAB);
+    audioPath = pool[fcIndex].au.saz;
+    btn = document.getElementById('btn_fc_sent_zh');
+  } else if (key.startsWith('word_')) {
+    const parts = key.split('_');
+    const idx = parseInt(parts[1]);
+    const type = parts[2];
+    const v = VOCAB[idx];
+    audioPath = type === 'en' ? v.au.en : v.au.zh;
+  } else if (key.startsWith('wordsent_')) {
+    const parts = key.split('_');
+    const idx = parseInt(parts[1]);
+    const type = parts[2];
+    const v = VOCAB[idx];
+    audioPath = type === 'en' ? v.au.sen : v.au.saz;
+  }
+  playAudioPath(audioPath, btn);
+}
+
+function autoPlayEn() {
+  if (document.getElementById('autoPlayCheck').checked) {
+    setTimeout(() => playAudio('fc_en'), 350);
+  }
+}
+
+// ===================== UTILITIES =====================
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function getFiltered(filter, pool) {
+  if (filter === 'all') return pool;
+  if (filter.startsWith('unit')) return pool.filter(v => v.unit === parseInt(filter.slice(4)));
+  return pool.filter(v => v.cat === filter);
+}
+
+function vocabIndex(v) { return VOCAB.indexOf(v); }
+
+function unitName(unit) {
+  const info = UNITS[unit];
+  if (!info) return 'Unit ' + unit;
+  return currentLang === 'zh' ? (info.zh || info.name) : info.name;
+}
+
+// ===================== BACKGROUND DECOR =====================
+function createStars() {
+  const bg = document.getElementById('starBg');
+  for (let i = 0; i < 70; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const size = 2 + Math.random() * 3.5;
+    s.style.width = s.style.height = size + 'px';
+    s.style.left = Math.random() * 100 + '%';
+    s.style.top = Math.random() * 100 + '%';
+    s.style.animationDuration = (2.5 + Math.random() * 4) + 's';
+    s.style.animationDelay = Math.random() * 4 + 's';
+    bg.appendChild(s);
+  }
+}
+
+function createFloats() {
+  const bg = document.getElementById('floatBg');
+  const petals = ['🌸', '🌺', '🌷', '❀', '✿', '🌸', '🌼'];
+  const butterflies = ['🦋', '🦋', '🦋', '💮'];
+  for (let i = 0; i < 10; i++) {
+    const p = document.createElement('div');
+    p.className = 'petal';
+    p.textContent = petals[Math.floor(Math.random() * petals.length)];
+    p.style.left = Math.random() * 100 + '%';
+    p.style.fontSize = (12 + Math.random() * 14) + 'px';
+    p.style.animationDuration = (14 + Math.random() * 16) + 's';
+    p.style.animationDelay = Math.random() * 14 + 's';
+    bg.appendChild(p);
+  }
+  for (let i = 0; i < 5; i++) {
+    const b = document.createElement('div');
+    b.className = 'butterfly';
+    b.textContent = butterflies[Math.floor(Math.random() * butterflies.length)];
+    b.style.left = Math.random() * 100 + '%';
+    b.style.fontSize = (14 + Math.random() * 12) + 'px';
+    b.style.animationDuration = (22 + Math.random() * 18) + 's';
+    b.style.animationDelay = Math.random() * 16 + 's';
+    bg.appendChild(b);
+  }
+}
+
+// ===================== THEME =====================
+function toggleTheme() {
+  document.body.classList.toggle('light-mode');
+  const light = document.body.classList.contains('light-mode');
+  localStorage.setItem('luo-li-english-theme', light ? 'light' : 'dark');
+  document.getElementById('themeToggle').textContent = light ? '🌙' : '☀️';
+}
+
+function initTheme() {
+  if (localStorage.getItem('luo-li-english-theme') === 'light') {
+    document.body.classList.add('light-mode');
+    document.getElementById('themeToggle').textContent = '🌙';
+  }
+}
+
+// ===================== TABS =====================
+function switchTab(tab) {
+  currentTab = tab;
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
+  document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === 'panel-' + tab));
+  if (tab === 'flashcard') initFlashcard();
+  if (tab === 'quiz') startQuiz();
+  if (tab === 'match') startMatch();
+  if (tab === 'words') renderWords();
+  if (tab !== 'flashcard') {
+    const hint = document.getElementById('swipeHint');
+    if (hint) hint.style.display = 'none';
+  }
+}
+
+// ===================== STATS =====================
+function updateStats() {
+  const learned = Object.values(state.mastery).filter(v => v >= 2).length;
+  document.getElementById('statLearned').textContent = learned;
+  document.getElementById('statStreak').textContent = state.streak;
+  document.getElementById('statTotal').textContent = VOCAB.length;
+  document.getElementById('statScore').textContent = state.score;
+  const pct = Math.round((learned / VOCAB.length) * 100);
+  document.getElementById('progressPct').textContent = pct + '%';
+  document.getElementById('progressFill').style.width = pct + '%';
+
+  if (learned === VOCAB.length && VOCAB.length > 0 && !state.celebratedAll) {
+    state.celebratedAll = true;
+    saveState();
+    launchConfetti();
+    showCelebration('👑', t('all_mastered'), t('all_mastered_msg'));
+  }
+}
+
+// ===================== FILTER PILLS =====================
+function buildFilterPills(containerId, currentFilter, onChange) {
+  const container = document.getElementById(containerId);
+  const filters = [
+    { id: 'all', label: '🌈 All' },
+    ...Object.entries(UNITS).map(([uid, info]) => ({
+      id: 'unit' + uid,
+      label: `${info.icon} ${currentLang === 'zh' ? info.zh : info.name}`,
+    })),
+  ];
+  container.innerHTML = '';
+  filters.forEach(f => {
+    const pill = document.createElement('button');
+    pill.className = 'filter-pill' + (currentFilter === f.id ? ' active' : '');
+    pill.textContent = f.label;
+    pill.onclick = () => { onChange(f.id); };
+    container.appendChild(pill);
+  });
+}
+
+// ===================== FLASHCARD =====================
+function initFlashcard() {
+  buildFilterPills('flashcardFilters', fcFilter, (f) => { fcFilter = f; fcIndex = 0; initFlashcard(); });
+  const pool = getFiltered(fcFilter, VOCAB);
+  if (pool.length === 0) return;
+  fcIndex = fcIndex % pool.length;
+  renderFlashcard(pool);
+}
+
+function renderFlashcard(pool) {
+  if (!pool) pool = getFiltered(fcFilter, VOCAB);
+  const v = pool[fcIndex];
+  const card = document.getElementById('flashcard');
+  card.classList.remove('flipped');
+  fcFlipped = false;
+
+  const unitTag = currentLang === 'zh'
+    ? `第${v.unit}契约 · ${UNITS[v.unit].zh}`
+    : `Pact ${v.unit} · ${UNITS[v.unit].name}`;
+  document.getElementById('fcUnit').textContent = unitTag;
+  document.getElementById('fcUnitBack').textContent = unitTag;
+  document.getElementById('fcCounter').textContent = `${fcIndex + 1} / ${pool.length}`;
+  document.getElementById('fcWord').textContent = v.en;
+  document.getElementById('fcWordBack').textContent = v.zh;
+  document.getElementById('fcSentEn').textContent = v.sent_en;
+  document.getElementById('fcSentZh').textContent = v.sent_zh;
+  card.setAttribute('aria-label', `Flashcard: ${v.en} - ${v.zh}`);
+
+  autoPlayEn();
+}
+
+function flipCard() {
+  const card = document.getElementById('flashcard');
+  fcFlipped = !fcFlipped;
+  card.classList.toggle('flipped', fcFlipped);
+  if (fcFlipped && document.getElementById('autoPlayCheck').checked) {
+    setTimeout(() => playAudio('fc_sent_en'), 550);
+  }
+}
+
+function markCard(difficulty) {
+  const pool = getFiltered(fcFilter, VOCAB);
+  const v = pool[fcIndex];
+  const idx = vocabIndex(v);
+
+  if (difficulty === 'easy') {
+    state.mastery[idx] = Math.min((state.mastery[idx] || 0) + 1, 3);
+    state.score += 10;
+    state.streak++;
+  } else {
+    state.mastery[idx] = Math.max((state.mastery[idx] || 0) - 1, 0);
+    state.streak = 0;
+  }
+  saveState();
+  updateStats();
+  markStudyToday();
+  renderStreakCalendar();
+
+  fcIndex = (fcIndex + 1) % pool.length;
+  if (fcIndex === 0 && difficulty === 'easy') {
+    launchConfetti();
+    showCelebration();
+  }
+  renderFlashcard(pool);
+}
+
+// ===================== QUIZ =====================
+function initQuiz() {
+  buildFilterPills('quizFilters', quizFilter, (f) => { quizFilter = f; startQuiz(); });
+  startQuiz();
+}
+
+function startQuiz() {
+  const pool = getFiltered(quizFilter, VOCAB);
+  quizQueue = shuffle(pool).slice(0, Math.min(10, pool.length));
+  nextQuiz();
+}
+
+function quizCompleteHTML() {
+  return `
+    <div class="empty-state">
+      <div class="empty-emoji">🦋</div>
+      <p>${t('round_complete')}</p>
+      <button class="card-btn" style="background:linear-gradient(135deg,var(--magic-purple),var(--magic-pink-deep));color:#fff;margin-top:16px;display:inline-flex;box-shadow:var(--glow-pink);" onclick="startQuiz()">${t('new_round_btn')}</button>
+    </div>`;
+}
+
+function nextQuiz() {
+  if (quizQueue.length === 0) {
+    document.getElementById('quizArea').innerHTML = quizCompleteHTML();
+    return;
+  }
+  const dir = document.getElementById('quizDirection').value;
+  if (dir === 'zh2en') { nextQuizReverse(); return; }
+
+  const current = quizQueue.shift();
+  quizCurrent = current;
+  const others = shuffle(VOCAB.filter(v => v !== current)).slice(0, 3);
+  const options = shuffle([current, ...others]);
+  const area = document.getElementById('quizArea');
+
+  area.innerHTML = `
+    <div class="quiz-question">
+      <div class="quiz-prompt">${t('quiz_question')}</div>
+      <div class="quiz-word">${current.en}</div>
+      <div class="quiz-audio-row">
+        <button class="audio-btn" onclick="playAudioPath(quizCurrent?.au?.en)" style="width:36px;height:36px;font-size:1rem;" aria-label="播放英语">🔊</button>
+        <button class="audio-btn" onclick="playAudioPath(quizCurrent?.au?.zh)" style="width:36px;height:36px;font-size:1rem;" aria-label="播放中文">🔊</button>
+      </div>
+      <div class="quiz-unit-tag">✨ ${unitName(current.unit)}</div>
+    </div>
+    <div class="quiz-options">
+      ${options.map((o, i) => `<button class="quiz-option" data-idx="${i}" onclick="answerQuiz(this, '${o.zh.replace(/'/g, "\\'")}', '${current.zh.replace(/'/g, "\\'")}')">${o.zh}</button>`).join('')}
+    </div>`;
+  setTimeout(() => playAudioPath(quizCurrent?.au?.en), 400);
+}
+
+function answerQuiz(btn, chosen, correct) {
+  const buttons = document.querySelectorAll('.quiz-option');
+  buttons.forEach(b => b.style.pointerEvents = 'none');
+
+  if (chosen === correct) {
+    btn.classList.add('correct');
+    btn.innerHTML += '<span class="quiz-icon">✓</span>';
+    const idx = vocabIndex(quizCurrent);
+    state.mastery[idx] = Math.min((state.mastery[idx] || 0) + 1, 3);
+    state.score += 15;
+    state.streak++;
+    state.totalAnswered++;
+  } else {
+    btn.classList.add('wrong');
+    btn.innerHTML += '<span class="quiz-icon">✗</span>';
+    buttons.forEach(b => { if (b.textContent.trim() === correct) { b.classList.add('correct'); b.innerHTML += '<span class="quiz-icon">✓</span>'; } });
+    const idx = vocabIndex(quizCurrent);
+    state.mastery[idx] = Math.max((state.mastery[idx] || 0) - 1, 0);
+    state.streak = 0;
+    state.totalAnswered++;
+  }
+  saveState();
+  updateStats();
+  markStudyToday();
+  renderStreakCalendar();
+  setTimeout(nextQuiz, 1200);
+}
+
+function nextQuizReverse() {
+  if (quizQueue.length === 0) {
+    document.getElementById('quizArea').innerHTML = quizCompleteHTML();
+    return;
+  }
+  const current = quizQueue.shift();
+  quizCurrent = current;
+  const others = shuffle(VOCAB.filter(v => v !== current)).slice(0, 3);
+  const options = shuffle([current, ...others]);
+  const area = document.getElementById('quizArea');
+
+  area.innerHTML = `
+    <div class="quiz-question">
+      <div class="quiz-prompt">${t('quiz_question')}</div>
+      <div class="quiz-word zh">${current.zh}</div>
+      <div class="quiz-audio-row">
+        <button class="audio-btn" onclick="playAudioPath(quizCurrent?.au?.en)" style="width:36px;height:36px;font-size:1rem;" aria-label="播放英语">🔊</button>
+        <button class="audio-btn" onclick="playAudioPath(quizCurrent?.au?.zh)" style="width:36px;height:36px;font-size:1rem;" aria-label="播放中文">🔊</button>
+      </div>
+      <div class="quiz-unit-tag">✨ ${unitName(current.unit)}</div>
+    </div>
+    <div class="quiz-options">
+      ${options.map((o, i) => `<button class="quiz-option" data-idx="${i}" onclick="answerQuizReverse(this, '${o.en.replace(/'/g, "\\'")}', '${current.en.replace(/'/g, "\\'")}')">${o.en}</button>`).join('')}
+    </div>`;
+  setTimeout(() => playAudioPath(quizCurrent?.au?.en), 400);
+}
+
+function answerQuizReverse(btn, chosen, correct) {
+  const buttons = document.querySelectorAll('.quiz-option');
+  buttons.forEach(b => b.style.pointerEvents = 'none');
+
+  if (chosen === correct) {
+    btn.classList.add('correct');
+    btn.innerHTML += '<span class="quiz-icon">✓</span>';
+    const idx = vocabIndex(quizCurrent);
+    state.mastery[idx] = Math.min((state.mastery[idx] || 0) + 1, 3);
+    state.score += 15;
+    state.streak++;
+    state.totalAnswered++;
+  } else {
+    btn.classList.add('wrong');
+    btn.innerHTML += '<span class="quiz-icon">✗</span>';
+    buttons.forEach(b => { if (b.textContent.trim().includes(correct)) { b.classList.add('correct'); b.innerHTML += '<span class="quiz-icon">✓</span>'; } });
+    const idx = vocabIndex(quizCurrent);
+    state.mastery[idx] = Math.max((state.mastery[idx] || 0) - 1, 0);
+    state.streak = 0;
+    state.totalAnswered++;
+  }
+  saveState();
+  updateStats();
+  markStudyToday();
+  renderStreakCalendar();
+  setTimeout(nextQuizReverse, 1200);
+}
+
+// ===================== MATCH =====================
+function startMatch() {
+  const pool = shuffle(VOCAB).slice(0, matchDifficulty);
+  const enCards = pool.map(v => ({ type: 'en', text: v.en, pairId: vocabIndex(v), matched: false }));
+  const zhCards = pool.map(v => ({ type: 'zh', text: v.zh, pairId: vocabIndex(v), matched: false }));
+  matchPairs = shuffle([...enCards, ...zhCards]);
+  matchSelected = null;
+  matchHistory = [];
+  document.getElementById('matchUndoBtn').style.display = 'none';
+  renderMatch();
+}
+
+function renderMatch() {
+  const grid = document.getElementById('matchGrid');
+  grid.innerHTML = matchPairs.map((c, i) => `
+    <div class="match-card ${c.type} ${c.matched ? 'matched' : ''}" data-idx="${i}" data-pairid="${c.pairId}" data-cardtype="${c.type}" onclick="selectMatch(${i})" role="button" aria-label="${c.type === 'en' ? 'English' : 'Chinese'}: ${c.text}">
+      <button class="match-audio" onclick="event.stopPropagation(); playMatchAudio(this.parentElement)" aria-label="播放发音">🔊</button>
+      ${c.text}
+    </div>`).join('');
+}
+
+function playMatchAudio(cardEl) {
+  const pairId = parseInt(cardEl.dataset.pairid);
+  const cardType = cardEl.dataset.cardtype;
+  const v = VOCAB[pairId];
+  if (v) playAudioPath(cardType === 'en' ? v.au.en : v.au.zh);
+}
+
+function selectMatch(idx) {
+  const card = matchPairs[idx];
+  if (card.matched) return;
+
+  if (matchSelected === null) {
+    matchSelected = idx;
+    document.querySelector(`.match-card[data-idx="${idx}"]`).classList.add('selected');
+    const v = VOCAB[card.pairId];
+    if (v) playAudioPath(card.type === 'en' ? v.au.en : v.au.zh);
+  } else {
+    const prev = matchPairs[matchSelected];
+    const prevEl = document.querySelector(`.match-card[data-idx="${matchSelected}"]`);
+    const curEl = document.querySelector(`.match-card[data-idx="${idx}"]`);
+
+    if (matchSelected === idx) {
+      prevEl.classList.remove('selected');
+      matchSelected = null;
+      return;
+    }
+
+    const v2 = VOCAB[card.pairId];
+    if (v2) playAudioPath(card.type === 'en' ? v2.au.en : v2.au.zh);
+
+    if (prev.pairId === card.pairId && prev.type !== card.type) {
+      prevEl.classList.remove('selected');
+      prevEl.classList.add('matched');
+      curEl.classList.add('matched');
+      state.mastery[prev.pairId] = Math.min((state.mastery[prev.pairId] || 0) + 1, 3);
+      state.score += 20;
+      state.streak++;
+      matchHistory.push({ idx1: matchSelected, idx2: idx, pairId: prev.pairId });
+      document.getElementById('matchUndoBtn').style.display = 'inline-flex';
+      matchSelected = null;
+
+      if (matchPairs.every(c => c.matched)) {
+        saveState();
+        updateStats();
+        markStudyToday();
+        renderStreakCalendar();
+        setTimeout(() => {
+          launchConfetti();
+          showCelebration('🧩', t('perfect_match'), t('perfect_match_msg'));
+        }, 600);
+      }
+    } else {
+      prevEl.classList.remove('selected');
+      prevEl.classList.add('wrong-match');
+      curEl.classList.add('wrong-match');
+      state.streak = 0;
+      matchSelected = null;
+      setTimeout(() => {
+        document.querySelectorAll('.wrong-match').forEach(el => el.classList.remove('wrong-match'));
+      }, 400);
+    }
+    saveState();
+    updateStats();
+  }
+}
+
+function setMatchDiff(n) {
+  matchDifficulty = n;
+  document.querySelectorAll('.match-diff-btn').forEach(b => {
+    b.classList.toggle('active', parseInt(b.dataset.diff) === n);
+  });
+  startMatch();
+}
+
+function undoMatch() {
+  if (matchHistory.length === 0) return;
+  const last = matchHistory.pop();
+  const prevEl = document.querySelector(`.match-card[data-idx="${last.idx1}"]`);
+  const curEl = document.querySelector(`.match-card[data-idx="${last.idx2}"]`);
+  if (prevEl) { prevEl.classList.remove('matched'); prevEl.style.pointerEvents = ''; }
+  if (curEl) { curEl.classList.remove('matched'); curEl.style.pointerEvents = ''; }
+  state.mastery[last.pairId] = Math.max((state.mastery[last.pairId] || 1) - 1, 0);
+  state.score = Math.max(state.score - 20, 0);
+  state.streak = Math.max(state.streak - 1, 0);
+  matchPairs[last.idx1].matched = false;
+  matchPairs[last.idx2].matched = false;
+  saveState();
+  updateStats();
+  document.getElementById('matchUndoBtn').style.display = matchHistory.length > 0 ? 'inline-flex' : 'none';
+}
+
+// ===================== WORDS LIST =====================
+function buildMasteryFilter() {
+  const container = document.getElementById('masteryFilter');
+  const filters = [
+    { id: 'all', label: t('mastery_all') },
+    { id: '0', label: t('mastery_new') },
+    { id: '1', label: t('mastery_learning') },
+    { id: '2', label: t('mastery_familiar') },
+    { id: '3', label: t('mastery_mastered') },
+  ];
+  container.innerHTML = '';
+  filters.forEach(f => {
+    const pill = document.createElement('button');
+    pill.className = 'mastery-pill' + (masteryFilterVal === f.id ? ' active' : '');
+    pill.textContent = f.label;
+    pill.onclick = () => { masteryFilterVal = f.id; buildMasteryFilter(); renderWords(); };
+    container.appendChild(pill);
+  });
+}
+
+function createProgressRing(pct) {
+  const r = 17;
+  const circumference = 2 * Math.PI * r;
+  const offset = circumference - (pct / 100) * circumference;
+  return `<svg class="unit-progress-ring" viewBox="0 0 42 42">
+    <defs><linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff7ad9"/><stop offset="100%" stop-color="#53e0d8"/>
+    </linearGradient></defs>
+    <circle class="ring-bg" cx="21" cy="21" r="${r}"/>
+    <circle class="ring-fill" cx="21" cy="21" r="${r}"
+      stroke-dasharray="${circumference}"
+      stroke-dashoffset="${offset}"/>
+  </svg>`;
+}
+
+function renderWords() {
+  const container = document.getElementById('wordsList');
+  container.innerHTML = '';
+  buildMasteryFilter();
+
+  Object.entries(UNITS).forEach(([unit, info]) => {
+    let words = VOCAB.filter(v => v.unit === parseInt(unit));
+    const totalWords = words.length;
+    const learned = words.filter(v => (state.mastery[vocabIndex(v)] || 0) >= 2).length;
+
+    if (masteryFilterVal !== 'all') {
+      const filterLevel = parseInt(masteryFilterVal);
+      words = words.filter(v => (state.mastery[vocabIndex(v)] || 0) === filterLevel);
+    }
+
+    const section = document.createElement('div');
+    section.className = 'unit-section';
+    section.style.animationDelay = (unit * 0.08) + 's';
+    const pct = totalWords > 0 ? Math.round((learned / totalWords) * 100) : 0;
+    const title = currentLang === 'zh' ? `第${unit}契约 · ${info.zh}` : `Pact ${unit} · ${info.name}`;
+
+    section.innerHTML = `
+      <div class="unit-header" onclick="toggleUnit(this)" role="button" aria-expanded="false">
+        <div class="unit-icon" style="background:${info.color}">${info.icon}</div>
+        <div class="unit-info">
+          <div class="unit-title">${title}</div>
+          <div class="unit-count">${learned} / ${totalWords} ${t('mastered')}</div>
+        </div>
+        ${createProgressRing(pct)}
+        <div class="unit-arrow">▾</div>
+      </div>
+      <div class="unit-words">
+        ${words.map(v => {
+          const idx = vocabIndex(v);
+          const m = state.mastery[idx] || 0;
+          return `<div class="word-row" style="border-left-color:${['#8a7bb5','#ffd166','#ff9a62','#53e0d8'][m]}">
+            <div class="word-text">
+              <div class="word-en">${v.en}</div>
+              <div class="word-zh">${v.zh}</div>
+              <div class="word-sent">${v.sent_en}</div>
+            </div>
+            <button class="word-audio-btn" onclick="event.stopPropagation(); playAudio('word_${idx}_en')" title="听英语" aria-label="听英语">🔊</button>
+            <button class="word-audio-btn" onclick="event.stopPropagation(); playAudio('wordsent_${idx}_en')" title="听句子" aria-label="听句子">💬</button>
+            <span class="mastery-dot mastery-${m}"></span>
+          </div>`;
+        }).join('')}
+      </div>`;
+
+    container.appendChild(section);
+  });
+
+  renderTrickyWords();
+}
+
+function toggleUnit(header) {
+  header.classList.toggle('open');
+  header.setAttribute('aria-expanded', header.classList.contains('open'));
+  const words = header.nextElementSibling;
+  words.classList.toggle('open');
+}
+
+// ===================== TRICKY WORDS REVIEW =====================
+function renderTrickyWords() {
+  const container = document.getElementById('trickyList');
+  const tricky = VOCAB.filter(v => (state.mastery[vocabIndex(v)] || 0) === 0);
+  document.getElementById('trickyCount').textContent = tricky.length > 0 ? `(${tricky.length})` : '';
+  if (tricky.length === 0) {
+    container.innerHTML = `<div class="tricky-empty">🎉 ${t('all_mastered_msg')}</div>`;
+    return;
+  }
+  container.innerHTML = tricky.map(v => {
+    const idx = vocabIndex(v);
+    return `<div class="word-row" style="border-left-color:#8a7bb5">
+      <div class="word-text">
+        <div class="word-en">${v.en}</div>
+        <div class="word-zh">${v.zh}</div>
+        <div class="word-sent">${v.sent_en}</div>
+      </div>
+      <button class="word-audio-btn" onclick="event.stopPropagation(); playAudio('word_${idx}_en')" aria-label="听英语">🔊</button>
+      <button class="word-audio-btn" onclick="event.stopPropagation(); playAudio('wordsent_${idx}_en')" aria-label="听句子">💬</button>
+    </div>`;
+  }).join('');
+}
+
+// ===================== CELEBRATION =====================
+function showCelebration(emoji, title, msg) {
+  const e = ENCOURAGEMENTS[Math.floor(Math.random() * ENCOURAGEMENTS.length)];
+  document.getElementById('celEmoji').textContent = emoji || e.emoji;
+  document.getElementById('celTitle').textContent = title || e.title;
+  document.getElementById('celMsg').textContent = msg || e.msg;
+  document.getElementById('celebration').classList.add('show');
+  launchConfetti();
+}
+
+function closeCelebration() {
+  document.getElementById('celebration').classList.remove('show');
+}
+
+// ===================== CONFETTI (magic sparkles + butterflies) =====================
+let confettiPieces = [];
+let confettiAnimId = null;
+
+function launchConfetti() {
+  const canvas = document.getElementById('confettiCanvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  confettiPieces = [];
+
+  const colors = ['#ff7ad9', '#ffd166', '#53e0d8', '#b06bff', '#7db8ff', '#ff8fab', '#fff'];
+  for (let i = 0; i < 150; i++) {
+    confettiPieces.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height - canvas.height,
+      w: 4 + Math.random() * 6,
+      h: 8 + Math.random() * 9,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      vx: (Math.random() - 0.5) * 4,
+      vy: 2 + Math.random() * 4,
+      rot: Math.random() * Math.PI * 2,
+      rotSpeed: (Math.random() - 0.5) * 0.22,
+      opacity: 1,
+      emoji: Math.random() < 0.22 ? ['🦋', '✨', '🌸', '⭐'][Math.floor(Math.random() * 4)] : null,
+    });
+  }
+
+  if (confettiAnimId) cancelAnimationFrame(confettiAnimId);
+
+  let elapsed = 0;
+  function animate() {
+    elapsed += 16;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    confettiPieces.forEach(p => {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.rot += p.rotSpeed;
+      p.vy += 0.05;
+      if (elapsed > 2200) p.opacity -= 0.018;
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      if (p.emoji) {
+        ctx.rotate(Math.sin(p.rot) * 0.4);
+        ctx.globalAlpha = Math.max(0, p.opacity);
+        ctx.font = '18px serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(p.emoji, 0, 0);
+      } else {
+        ctx.rotate(p.rot);
+        ctx.globalAlpha = Math.max(0, p.opacity);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+      }
+      ctx.restore();
+    });
+    if (elapsed < 4500 && confettiPieces.some(p => p.opacity > 0)) {
+      confettiAnimId = requestAnimationFrame(animate);
+    } else {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      confettiAnimId = null;
+    }
+  }
+  animate();
+}
+
+// ===================== DAILY STREAK =====================
+function getStreakData() {
+  try { return JSON.parse(localStorage.getItem('luo-li-english-streak-days') || '{}'); }
+  catch (e) { return {}; }
+}
+
+function markStudyToday() {
+  const today = new Date().toISOString().slice(0, 10);
+  const data = getStreakData();
+  data[today] = (data[today] || 0) + 1;
+  localStorage.setItem('luo-li-english-streak-days', JSON.stringify(data));
+}
+
+function renderStreakCalendar() {
+  const cal = document.getElementById('streakCalendar');
+  const data = getStreakData();
+  const today = new Date();
+  let html = '';
+  for (let i = 6; i >= 0; i--) {
+    const d = new Date(today);
+    d.setDate(d.getDate() - i);
+    const key = d.toISOString().slice(0, 10);
+    const dayNames = ['日', '一', '二', '三', '四', '五', '六'];
+    const isActive = data[key] && data[key] > 0;
+    const isToday = i === 0;
+    html += `<div class="streak-day ${isActive ? 'active' : ''} ${isToday ? 'today' : ''}">${dayNames[d.getDay()]}</div>`;
+  }
+  cal.innerHTML = html;
+}
+
+// ===================== KEYBOARD =====================
+document.addEventListener('keydown', (e) => {
+  if (currentTab === 'flashcard') {
+    if (e.code === 'Space' || e.code === 'Enter') {
+      e.preventDefault();
+      flipCard();
+    } else if (e.code === 'ArrowRight') {
+      e.preventDefault();
+      markCard('easy');
+    } else if (e.code === 'ArrowLeft') {
+      e.preventDefault();
+      markCard('hard');
+    }
+  }
+  if (e.code === 'Escape') closeCelebration();
+});
+
+// ===================== SWIPE =====================
+let touchStartX = 0;
+let touchStartY = 0;
+document.addEventListener('touchstart', (e) => {
+  if (currentTab !== 'flashcard') return;
+  touchStartX = e.changedTouches[0].screenX;
+  touchStartY = e.changedTouches[0].screenY;
+}, { passive: true });
+
+document.addEventListener('touchend', (e) => {
+  if (currentTab !== 'flashcard') return;
+  // iOS: ignore taps that start on buttons, and taps outside the card
+  if (e.target.closest && e.target.closest('button')) return;
+  if (e.target.closest && !e.target.closest('#flashcard')) return;
+  const dx = e.changedTouches[0].screenX - touchStartX;
+  const dy = e.changedTouches[0].screenY - touchStartY;
+  if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
+    if (dx < 0) markCard('easy');
+    else markCard('hard');
+  } else if (Math.abs(dy) < 20 && Math.abs(dx) < 20) {
+    touchHandledFlip = true;
+    flipCard();
+  }
+}, { passive: true });
+
+// ===================== INIT =====================
+document.querySelectorAll('.nav-tab').forEach(tab => {
+  tab.addEventListener('click', () => switchTab(tab.dataset.tab));
+});
+
+// ---- Flashcard interaction (mirrors deployed pony-english handling) ----
+// Track if touch already handled the flip, so the click that iOS
+// synthesizes right after touchend does not flip the card a 2nd time.
+let touchHandledFlip = false;
+
+// Flashcard click - flip only when the tap did NOT start on a button
+const fcCardEl = document.getElementById('flashcard');
+if (fcCardEl) {
+  fcCardEl.addEventListener('click', function(e) {
+    if (touchHandledFlip) {
+      touchHandledFlip = false;
+      return;
+    }
+    if (!e.target.closest('button')) {
+      flipCard();
+    }
+  });
+}
+
+// Flashcard audio buttons - play audio only (never flip)
+const fcButtons = [
+  ['btn_fc_en', 'fc_en'],
+  ['btn_fc_zh', 'fc_zh'],
+  ['btn_fc_sent_en', 'fc_sent_en'],
+  ['btn_fc_sent_zh', 'fc_sent_zh'],
+];
+fcButtons.forEach(([id, key]) => {
+  const btn = document.getElementById(id);
+  if (btn) btn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    playAudio(key);
+  });
+});
+
+initTheme();
+createStars();
+createFloats();
+updateUITranslations();
+updateStats();
+renderStreakCalendar();
+initFlashcard();
+</script>
+</body>
+</html>

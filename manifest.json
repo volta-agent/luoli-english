@@ -1,0 +1,16 @@
+{
+  "name": "Luo Li English",
+  "short_name": "罗丽英语",
+  "description": "Luo Li English 魔法主题英语词汇学习应用 · 三年级下册",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#241353",
+  "theme_color": "#2a1658",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦋</text></svg>",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
