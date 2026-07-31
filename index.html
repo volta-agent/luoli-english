@@ -1452,7 +1452,7 @@ function markCard(difficulty) {
 
 // ===================== QUIZ =====================
 function initQuiz() {
-  buildFilterPills('quizFilters', quizFilter, (f) => { quizFilter = f; startQuiz(); });
+  buildFilterPills('quizFilters', quizFilter, (f) => { quizFilter = f; initQuiz(); });
   startQuiz();
 }
 
@@ -1586,7 +1586,7 @@ function answerQuizReverse(btn, chosen, correct) {
 
 // ===================== MATCH =====================
 function initMatch() {
-  buildFilterPills('matchFilters', matchFilter, (f) => { matchFilter = f; startMatch(); });
+  buildFilterPills('matchFilters', matchFilter, (f) => { matchFilter = f; initMatch(); });
   startMatch();
 }
 
